@@ -112,7 +112,7 @@ components:
           description: The user's last login date and time
           
   securitySchemes:
-    bearerAuth:            # arbitrary name for the security scheme
+    bearerAuth:          
       type: http
       scheme: bearer
       bearerFormat: JWT           
