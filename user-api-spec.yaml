@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  title: User API
+  description: This API provides endpoints for managing users.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /users:
+    get:
+      summary: Get all users
+      operationId: getUsers
+      parameters:
+        - name: page
+          in: query
+          description: The page number
+          required: false
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: The number of users per page
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: A paginated list of users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: integer
+                    description: The current page number
+                  size:
+                    type: integer
+                    description: The number of users per page
+                  content:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/User"
+    post:
+      summary: Create a new user
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        201:
+          description: The user was created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          description: The user's email address
+        password:
+          type: string
+          description: The user's password
+        userid:
+          type: string
+          description: The user's unique ID
+        username:
+          type: string
+          description: The user's username
+        lastLogin:
+          type: string
+          description: The user's last login date and time
